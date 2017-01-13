@@ -1,10 +1,10 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.mujaffars.mrsquare"
+        id        = "com.mujaffars.vungleAd"
         version   = "1.0.1">
-    <name>Square loves Star</name>
+    <name>Vungle Ad</name>
     
-    <description>Square loves Star</description>
+    <description>Vungle Ad</description>
     <content src="index.html" />
     <access origin="*" />
 
