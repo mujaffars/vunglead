@@ -4,7 +4,7 @@
 <head>
     <title>Hello Appodeal</title>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <!--<script type="text/javascript" src="js/index.js"></script>-->
 </head>
 
 <body onload="onLoad()" style="background-color:red;/* position: fixed; top: 0; bottom: 0; left: 0; right: 0; width: 100%; height: 100%;*/">
@@ -25,7 +25,7 @@
             
             setUserSettings();
 
-            Appodeal.initialize(appKey, Appodeal.INTERSTITIAL | Appodeal.SKIPPABLE_VIDEO | Appodeal.BANNER | Appodeal.REWARDED_VIDEO);
+            Appodeal.initialize(appKey, Appodeal.SKIPPABLE_VIDEO);
 
             Appodeal.enableInterstitialCallbacks(true);
             Appodeal.enableSkippableVideoCallbacks(true);
@@ -158,7 +158,7 @@
     <button id="interstitial" onclick="showInterstitial();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">Interstitial
   </button>
     <button id="video" onclick="showSkippableVideo();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">
-    Video
+    Skippable Video
   </button>
     <button id="rewarded" onclick="showRewardedVideo();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">
     Rewarded Video
