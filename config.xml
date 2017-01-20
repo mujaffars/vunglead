@@ -14,6 +14,8 @@
     
     <gap:plugin name="cordova-plugin-ad-vungle" source="npm" />
     
+    <gap:plugin name="com.appodeal.plugin" source="npm" />
+    
     <!-- Customize your app and platform with the preference element. -->
     <preference name="orientation"                value="portrait" />        <!-- all: default means both landscape and portrait are enabled -->
     <preference name="target-device"              value="handset" />      <!-- all: possible values handset, tablet, or universal -->
