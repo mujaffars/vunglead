@@ -1,5 +1,3 @@
-var appId = "58787b0c9216b4f04d0000ca";
-
 function onLoad() {
     if ((/(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent))) {
         document.addEventListener("deviceready", function () {
@@ -30,23 +28,4 @@ function onLoad() {
     } else {
         initApp();
     }
-}
-
-function initApp() {
-    initAd();
-}
-
-function initAd() {
-
-    alert('Inside init app');
-
-    window.vungle.showRewardedVideoAd();
-    alert(window.vungle.loadedRewardedVideoAd());//boolean: true or false
-    alert(window.vungle.isShowingRewardedVideoAd());//boolean: true or false
-
-}
-
-function showRewaAd() {
-    alert('inside show reward ad')
-    window.vungle.showRewardedVideoAd();
 }

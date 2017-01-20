@@ -1,39 +1,175 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="css/button.css">
-        <link rel="stylesheet" href="css/font-awesome.css">
-        <meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    </head>
-    <body onload="onLoad()">
 
-        <!-- zone_jeu => zone_play -->
-        <div id="header">
-            <div class="theMoves"></div>
-        </div>
-        <div id="level_area">
+<head>
+    <title>Hello Appodeal</title>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</head>
 
-        </div>
-        <div id="play_area" style="display: none;">
-
-        </div>
+<body onload="onLoad()" style="background-color:red;/* position: fixed; top: 0; bottom: 0; left: 0; right: 0; width: 100%; height: 100%;*/">
+    
+    <script type="text/javascript">
         
-        <br/>
-        <br/>
-        <input type="button" value="Show Int" onclick="showRewaAd()"/>
+//        document.addEventListener("deviceready", function () {
+//            
+//        })
+        function initialize() {
+            alert('inside initialize')
+            var appKey = "a52cb483c83acda8f0d7b7e157f63b8c238650d2588a082e";
+            
+            Appodeal.confirm(Appodeal.SKIPPABLE_VIDEO);
+            Appodeal.setLogging(true);
+            
+            alert('inside initialize function');
+            
+            setUserSettings();
 
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.js"></script>
-        <script type="text/javascript">$(document).bind("mobileinit", function () {
-                $.extend($.mobile, {autoInitializePage: false})
-            });</script>
-        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-        <script type="text/javascript" src="js/globals.js?v=4"></script>
-        <script type="text/javascript" src="js/pzls.js?v=4"></script>
-        <script type="text/javascript" src="js/init.js?v=4"></script>
-        <script type="text/javascript" src="js/ads.js?v=4"></script>
-    </body>
+            Appodeal.initialize(appKey, Appodeal.INTERSTITIAL | Appodeal.SKIPPABLE_VIDEO | Appodeal.BANNER | Appodeal.REWARDED_VIDEO);
+
+            Appodeal.enableInterstitialCallbacks(true);
+            Appodeal.enableSkippableVideoCallbacks(true);
+            Appodeal.enableBannerCallbacks(true);
+            Appodeal.enableRewardedVideoCallbacks(true);
+
+            Appodeal.setCustomIntegerRule("rule_name", 1);
+            Appodeal.setCustomDoubleRule("rule_name", 1.0);
+            Appodeal.setCustomBooleanRule("rule_name", true);
+            Appodeal.setCustomStringRule("rule_name", "rule_value");
+
+            registerAdEvents();
+        }
+
+        function setUserSettings() {
+            Appodeal.setUserId("Mujaffar");
+            Appodeal.setEmail("mujaffar.sanadi01@gmail.com");
+            Appodeal.setBirthday("20/12/1990");
+            Appodeal.setAge(25);
+            Appodeal.setGender("male");
+            Appodeal.setOccupation("work");
+            Appodeal.setRelation("dating");
+            Appodeal.setSmoking("negative");
+            Appodeal.setAlcohol("neutral");
+            Appodeal.setInterests("work, cinema, cars");
+        }
+
+        function showInterstitial() {
+            Appodeal.show(Appodeal.INTERSTITIAL, function(result) {
+                alert(result);
+                if (result) {
+                    alert("Appodeal Ads Shown");
+                } else {
+                    alert("Appodeal Ads Not Shown");
+                }
+            });
+        }
+
+        function showSkippableVideo() {
+            Appodeal.isLoaded(Appodeal.SKIPPABLE_VIDEO, function(result) {
+                alert(result);
+                if (result) {
+                    Appodeal.show(Appodeal.SKIPPABLE_VIDEO);
+                }
+            });
+        }
+
+        function showRewardedVideo() {
+            Appodeal.showWithPlacement(Appodeal.REWARDED_VIDEO, "rewarded_vide-Button_click");
+        }
+
+        function showBanner() {
+            Appodeal.show(Appodeal.BANNER_BOTTOM);
+        }
+
+        function showInterstitialOrVideo() {
+            Appodeal.show(Appodeal.INTERSTITIAL | Appodeal.VIDEO);
+        }
+
+        function hideBanner() {
+            Appodeal.hide(Appodeal.BANNER);
+        }
+
+        function registerAdEvents() {
+            document.addEventListener('onInterstitialShown', function() {
+                alert('Cordova onInterstitialShown');
+            });
+            document.addEventListener('onInterstitialLoaded', function() {
+                alert('Cordova onInterstitialLoaded');
+            });
+            document.addEventListener('onInterstitialFailedToLoad', function() {
+                alert('Cordova onInterstitialFailedToLoad');
+            });
+            document.addEventListener('onInterstitialClosed', function() {
+                alert('Cordova onInterstitialClosed');
+            });
+            document.addEventListener('onInterstitialClicked', function() {
+                alert('Cordova onInterstitialClicked');
+            });
+
+            document.addEventListener('onSkippableVideoClosed', function() {
+                alert('Cordova onSkippableVideoClosed');
+            });
+            document.addEventListener('onSkippableVideoFailedToLoad', function() {
+                alert('Cordova onSkippableVideoFailedToLoad');
+            });
+            document.addEventListener('onSkippableVideoFinished', function() {
+                alert('Cordova onSkippableVideoFinished');
+            });
+            document.addEventListener('onSkippableVideoLoaded', function() {
+                alert('Cordova onSkippableVideoLoaded');
+            });
+            document.addEventListener('onSkippableVideoShown', function() {
+                alert('Cordova onSkippableVideoShown');
+            });
+
+            document.addEventListener('onRewardedVideoClosed', function() {
+                alert('Cordova onRewardedVideoClosed');
+            });
+            document.addEventListener('onRewardedVideoFailedToLoad', function() {
+                alert('Cordova onRewardedVideoFailedToLoad');
+            });
+            document.addEventListener('onRewardedVideoFinished', function(data) {
+                alert('Cordova reward:' + data.amount + ' ' + data.name);
+            });
+            document.addEventListener('onRewardedVideoLoaded', function() {
+                alert('Cordova onRewardedVideoLoaded');
+            });
+            document.addEventListener('onRewardedVideoShown', function() {
+                alert('Cordova onRewardedVideoShown');
+            });
+
+            document.addEventListener('onBannerClicked', function() {
+                alert('Cordova onBannerClicked');
+            });
+            document.addEventListener('onBannerFailedToLoad', function() {
+                alert('Cordova onBannerFailedToLoad');
+            });
+            document.addEventListener('onBannerLoaded', function() {
+                alert('Cordova onBannerLoaded');
+            });
+            document.addEventListener('onBannerShown', function() {
+                alert('Cordova onBannerShown');
+            });
+        }
+    </script>
+    <p style="font-size:25px;color:white;">Appodeal Cordova Demo</p>
+    <button id="initialize" onclick="initialize();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">Initialize
+  </button>
+    <button id="interstitial" onclick="showInterstitial();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">Interstitial
+  </button>
+    <button id="video" onclick="showSkippableVideo();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">
+    Video
+  </button>
+    <button id="rewarded" onclick="showRewardedVideo();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">
+    Rewarded Video
+  </button>
+    <button id="interstitialVideo" onclick="showInterstitialOrVideo();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">
+    Interstitial or Video
+  </button>
+    <button id="showBanner" onclick="showBanner();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">Show Banner
+  </button>
+    <button id="hideBanner" onclick="hideBanner();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">Hide Banner
+  </button>
+</body>
+
 </html>
