@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Hello Appodeal</title>
+        <script type="text/javascript" src="cordova.js"></script>
+        <!--<script type="text/javascript" src="js/index.js"></script>-->
+    </head>
+
+    <body onload="onLoad()" style="background-color:red;/* position: fixed; top: 0; bottom: 0; left: 0; right: 0; width: 100%; height: 100%;*/">
+
+        <script type="text/javascript">
+            
+            function initialize() {
+                alert('inside initialize')
+                var appKey = "bc383df1c86ff7dfb25e95e6a9fadf59a8bd27cc87883ec7";
+
+                Appodeal.disableLocationPermissionCheck();
+                Appodeal.initialize(appKey, Appodeal.SKIPPABLE_VIDEO | Appodeal.REWARDED_VIDEO);
+
+                alert('inside initialize function');
+
+                setUserSettings();
+
+                Appodeal.initialize(appKey, Appodeal.SKIPPABLE_VIDEO);
+
+                Appodeal.enableInterstitialCallbacks(true);
+                Appodeal.enableSkippableVideoCallbacks(true);
+                Appodeal.enableBannerCallbacks(true);
+                Appodeal.enableRewardedVideoCallbacks(true);
+
+                Appodeal.setCustomIntegerRule("rule_name", 1);
+                Appodeal.setCustomDoubleRule("rule_name", 1.0);
+                Appodeal.setCustomBooleanRule("rule_name", true);
+                Appodeal.setCustomStringRule("rule_name", "rule_value");
+
+                registerAdEvents();
+            }
+
+            function setUserSettings() {
+                Appodeal.setUserId("Mujaffar");
+                Appodeal.setEmail("mujaffar.sanadi01@gmail.com");
+                Appodeal.setBirthday("20/12/1990");
+                Appodeal.setAge(25);
+                Appodeal.setGender("male");
+                Appodeal.setOccupation("work");
+                Appodeal.setRelation("dating");
+                Appodeal.setSmoking("negative");
+                Appodeal.setAlcohol("neutral");
+                Appodeal.setInterests("work, cinema, cars");
+            }
+
+            function showSkippableVideo() {
+                Appodeal.isLoaded(Appodeal.SKIPPABLE_VIDEO, function (result) {
+                    if (result) {
+                        Appodeal.show(Appodeal.SKIPPABLE_VIDEO);
+                    }
+                });
+            }
+
+            function showRewardedVideo() {
+                Appodeal.isLoaded(Appodeal.REWARDED_VIDEO, function (result) {
+                    if (result) {
+                        Appodeal.show(Appodeal.REWARDED_VIDEO);
+                    }
+                })
+            }
+
+            function registerAdEvents() {
+
+                Appodeal.enableSkippableVideoCallbacks(true);
+                document.addEventListener('onSkippableVideoLoaded', function () {
+                    alert('Skippable loaded');
+                });
+                document.addEventListener('onSkippableVideoFailedToLoad', function () {
+                });
+                document.addEventListener('onSkippableVideoShown', function () {
+                });
+                document.addEventListener('onSkippableVideoFinished', function () {
+                });
+                document.addEventListener('onSkippableVideoClosed', function () {
+                });
+
+                Appodeal.enableRewardedVideoCallbacks(true);
+                document.addEventListener('onRewardedVideoLoaded', function () {
+                    alert('Reward loaded');
+                });
+                document.addEventListener('onRewardedVideoLoaded', function () {
+                    alert('Reward loaded');
+                });
+                document.addEventListener('onRewardedVideoFailedToLoad', function () {
+                    alert('Reward fail');
+                });
+                document.addEventListener('onRewardedVideoShown', function () {
+                });
+                document.addEventListener('onRewardedVideoFinished', function (data) {
+                    alert('Reward:' + data.amount + ' ' + data.name);  //data.amount  - amount of reward, data.name - reward name
+                });
+                document.addEventListener('onRewardedVideoClosed', function () {
+                });
+            }
+        </script>
+        
+        <p style="font-size:25px;color:white;">Appodeal Cordova Demo</p>
+        
+        <button id="video" onclick="initialize();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">
+            Initialize
+        </button>
+        
+        <button id="video" onclick="showSkippableVideo();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">
+            Skippable Video
+        </button>
+        
+        <button id="rewarded" onclick="showRewardedVideo();" style="width:100%;height:50px; margin-top:10px;background-color:white;color:red;">
+            Rewarded Video
+        </button>
+
+    </body>
+
+</html>
